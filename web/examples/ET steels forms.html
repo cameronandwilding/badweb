@@ -89,11 +89,13 @@
     var $ufo = null;
     var ufo_target_x = -300;
     var ufo_target_y = -300;
-    var ufo_s = 10;
     var $target = null;
     var MODE_CHASE = 0;
     var MODE_ESCAPE = 1;
     var mode = MODE_CHASE;
+    var S_FAST = 40;
+    var S_SLOW = 20;
+    var ufo_s = S_SLOW;
 
     jQuery(function () {
       $ufo = jQuery('#ufo');
@@ -109,7 +111,7 @@
 
     function on_ufo_hit() {
       mode = MODE_ESCAPE;
-      ufo_s = 30;
+      ufo_s = S_FAST;
       ufo_target_x = Math.random() * jQuery(window).width();
       ufo_target_y = Math.random() * jQuery(window).height();
       if (Math.random() < 0.5) {
@@ -156,7 +158,7 @@
     }
 
     function start_ufo_mission() {
-      ufo_s = 10;
+      ufo_s = S_SLOW;
       var $elements = jQuery('input,select');
       var target = $elements[Math.floor(Math.random() * $elements.length)];
       $target = jQuery(target);
