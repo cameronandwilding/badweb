@@ -14,7 +14,15 @@
     <h2>Jackpot acquiring form</h2>
 
     <div class="form-group">
-      <input> <label>First name</label>
+      <label>First name</label>: <input>
+    </div>
+
+    <div class="form-group">
+      <label>Last name</label>: <input>
+    </div>
+
+    <div class="form-group">
+      <label>Address</label>: <input>
     </div>
 
     <input type="submit" value="Submit" id="submit">
@@ -24,15 +32,15 @@
 <script>
   (function () {
     var scared = [];
-
-    jQuery('input').each(function () {
-      var $elem = jQuery(this);
-      var ex = $elem.position().left + ($elem.width() >> 1);
-      var ey = $elem.position().top + ($elem.height() >> 1);
-      scared.push([$elem, ex, ey, $elem.width() * 0.6]);
-    });
-
     jQuery(function () {
+      jQuery('input').each(function () {
+        var $elem = jQuery(this);
+        var ex = $elem.position().left + ($elem.width() >> 1);
+        var ey = $elem.position().top + ($elem.height() >> 1);
+        scared.push([$elem, ex, ey, $elem.width() * 0.7]);
+      });
+      console.log(scared);
+
       jQuery(document).on('mousemove', function (e) {
         var mx = e.pageX;
         var my = e.pageY;
