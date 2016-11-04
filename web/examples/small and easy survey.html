@@ -1,0 +1,61 @@
+<style>
+  #form {
+    width: 60%;
+    margin: auto;
+  }
+
+  .form-group select {
+    max-height: 18px;
+  }
+
+  .form-group input {
+    margin-bottom: 20px;
+    pointer-events: none;
+  }
+
+  .red {
+    color: red;
+  }
+
+  input {
+    position: relative;
+  }
+</style>
+
+<div>
+  <div id="form">
+    <h2>Small and Easy Survey</h2>
+
+    <div class="form-group">
+      <label class="red">Enter your details:</label>
+      <br>
+      <br>
+      First name: <input type="text" name="fname"><br>
+      Last name: <input type="text" name="lname"><br>
+      Country: <input type="text" name="country"><br>
+      <br>
+
+      <label class="red">Please select multiple options on how you found us:</label>
+      <select multiple>
+        <option value="default">Select options</option>
+        <option value="website">Website</option>
+        <option value="search-engine">Search engine</option>
+        <option value="advertisement">Advertisement</option>
+        <option value="event">Event</option>
+        <option value="blog">Blog</option>
+        <option value="social-media">Social media</option>
+        <option value="from-friend">From a Friend</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Submit" class="btn">
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+</script>
