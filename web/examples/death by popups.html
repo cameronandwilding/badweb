@@ -1,0 +1,53 @@
+<style>
+  input {
+    position: relative;
+    top: 200px;
+    left: 450px;
+  }
+
+</style>
+
+<h1><blink>Congratulation, you are the 1'000'000th visitor! Claim your reward!</blink></h1>
+
+<input type="submit" value="*** !!! CLAIM AMAZING PRICE !!! ***" class="btn btn-danger">
+
+<div>
+  <canvas id="canvas" width="1280" height="800"></canvas>
+</div>
+
+
+<hr>
+
+<small>The company takes zero responsibility.</small>
+
+<script>
+  (function () {
+    var popup_num = 6;
+    var ctx = null;
+    var canvas;
+    var canvas_width = 0;
+    var canvas_height = 0;
+
+    function present_popup() {
+      var img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, Math.random() * canvas_height - 120, Math.random() * canvas_width - 200);
+      };
+      img.src = 'examples/assets/popup' + Math.floor(Math.random() * popup_num) + '.png';
+    }
+
+    function start_torture() {
+      jQuery('input').hide();
+      setInterval(present_popup, 10);
+    }
+
+    jQuery(function () {
+      canvas = document.getElementById('canvas');
+      ctx = canvas.getContext('2d');
+      canvas_width = jQuery(canvas).width();
+      canvas_height = jQuery(canvas).height();
+
+      jQuery('input').on('click', start_torture);
+    });
+  })();
+</script>
