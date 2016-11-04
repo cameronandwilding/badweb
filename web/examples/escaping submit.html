@@ -4,35 +4,94 @@
     margin: auto;
   }
 
-  input {
+  input, select {
     position: relative;
   }
 </style>
 
 <div>
-  <div id="form">
+  <div id="form" class="row">
     <h2>Jackpot acquiring form</h2>
 
+    <br>
+    <br>
+
     <div class="form-group">
-      <input> <label>First name</label>
+      <div class="col-sm-2">
+        <label>First name</label>
+      </div>
+      <input>
     </div>
+
+    <div class="form-group">
+      <div class="col-sm-2">
+        <label>Last name</label>
+      </div>
+      <input>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-2">
+        <label>Address</label>
+      </div>
+      <input>
+    </div>
+
+    <div class="row">
+      <div style="float: left; width: 200px">
+        <div class="form-group">
+          <input type="radio" name="food" value="1"> <label>Meat</label><br>
+          <input type="radio" name="food" value="1"> <label>Vegatable</label><br>
+          <input type="radio" name="food" value="1"> <label>Fish</label><br>
+          <input type="radio" name="food" value="1"> <label>Egg</label><br>
+        </div>
+      </div>
+      <div class="">
+        <div class="form-group">
+          <input type="checkbox"> <label>Order meat</label><br>
+          <input type="checkbox"> <label>Order vegatable</label><br>
+          <input type="checkbox"> <label>Order fish</label><br>
+          <input type="checkbox"> <label>Order egg</label><br>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Number of kids: </label>
+      <select>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+      </select>
+    </div>
+
+    <br>
 
     <input type="submit" value="Submit" id="submit">
   </div>
 </div>
 
 <script>
+  'use strict';
+
   (function () {
     var scared = [];
 
-    jQuery('input').each(function () {
-      var $elem = jQuery(this);
-      var ex = $elem.position().left + ($elem.width() >> 1);
-      var ey = $elem.position().top + ($elem.height() >> 1);
-      scared.push([$elem, ex, ey, $elem.width() * 0.6]);
-    });
+    function dist(a, b) {
+      return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    }
 
     jQuery(function () {
+      jQuery('input,select').each(function () {
+        var $elem = jQuery(this);
+        var ex = $elem.position().left + ($elem.width() >> 1);
+        var ey = $elem.position().top + ($elem.height() >> 1);
+        scared.push([$elem, ex, ey, dist($elem.width(), $elem.height())]);
+      });
+
       jQuery(document).on('mousemove', function (e) {
         var mx = e.pageX;
         var my = e.pageY;
@@ -42,13 +101,15 @@
           var ey = elem[2];
           var $elem = elem[0];
           var zone = elem[3];
+
           var d = Math.sqrt(Math.pow(mx - ex, 2) + Math.pow(my - ey, 2));
+
           if (d > zone) {
             $elem.css('left', 0);
             $elem.css('top', 0);
           } else {
-            $elem.css('left', -((zone * (ex > mx ? -1 : 1)) + (ex - mx)));
-            $elem.css('top', -((zone * (ey > my ? -1 : 1)) + (ey - my)));
+            $elem.css('left', +(((zone - d) * (ex > mx ? 1 : -1)) + (ex - mx)));
+            $elem.css('top', +(((zone - d) * (ey > my ? 1 : -1)) + (ey - my)));
           }
         });
       });

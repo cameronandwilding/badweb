@@ -1,0 +1,168 @@
+<style>
+  .form-group {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+  }
+
+  #ufo {
+    position: fixed;
+    left: -300px;
+    top: -300px;
+    cursor: url('examples/assets/aim.png') 48 48, auto;
+  }
+</style>
+
+<div>
+  <h1>Profile form</h1>
+  <br>
+  <br>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Full name</label>
+        <div class="col-sm-9">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Address</label>
+        <div class="col-sm-9">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Occupation</label>
+        <div class="col-sm-9">
+          <select class="form-control">
+            <option>Farmer</option>
+            <option>Developer</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox"> I need magazine subscription
+        </label>
+        <br>
+        <label>
+          <input type="checkbox"> I need meat
+        </label>
+        <br>
+        <label>
+          <input type="checkbox"> Do not want spam
+        </label>
+        <br>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">School</label>
+        <div class="col-sm-10">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">City</label>
+        <div class="col-sm-10">
+          <input class="form-control">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <input type="submit" value="Save details" class="btn btn-normal">
+</div>
+
+<img src="examples/assets/ufo.png" id="ufo" />
+
+<script>
+  'use strict';
+
+  (function () {
+    var $ufo = null;
+    var ufo_target_x = -300;
+    var ufo_target_y = -300;
+    var ufo_s = 10;
+    var $target = null;
+    var MODE_CHASE = 0;
+    var MODE_ESCAPE = 1;
+    var mode = MODE_CHASE;
+
+    jQuery(function () {
+      $ufo = jQuery('#ufo');
+      $ufo.css('top', -300);
+      $ufo.css('left', -300);
+
+      $ufo.on('click', on_ufo_hit);
+
+      start_ufo_mission();
+
+      setInterval(update_screen, 50);
+    });
+
+    function on_ufo_hit() {
+      mode = MODE_ESCAPE;
+      ufo_s = 30;
+      ufo_target_x = Math.random() * jQuery(window).width();
+      ufo_target_y = Math.random() * jQuery(window).height();
+      if (Math.random() < 0.5) {
+        ufo_target_x = Math.random() < 0.5 ? -100 : jQuery(window).width() + 100;
+      } else {
+        ufo_target_y = Math.random() < 0.5 ? -100 : jQuery(window).height() + 100;
+      }
+    }
+
+    function dist(a, b) {
+      return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    }
+
+    function update_screen() {
+      update_ufo();
+    }
+
+    function update_ufo() {
+      var ux = $ufo.position().left;
+      var dx = ufo_target_x - ux;
+      var uy = $ufo.position().top;
+      var dy = ufo_target_y - uy;
+      var d = dist(dx, dy);
+
+      var new_x, new_y;
+
+      if (d <= ufo_s) {
+        if (mode == MODE_CHASE) {
+          new_x = ufo_target_x + (Math.random() - 0.5) * 5;
+          new_y = ufo_target_y + (Math.random() - 0.5) * 5;
+          $target.css('opacity', parseFloat($target.css('opacity')) - 0.05);
+        } else if (mode == MODE_ESCAPE) {
+          mode = MODE_CHASE;
+          start_ufo_mission();
+          return;
+        }
+      } else {
+        new_x = ux + (dx / d) * ufo_s + (Math.random() - 0.5) * 12;
+        new_y = uy + (dy / d) * ufo_s + (Math.random() - 0.5) * 12;
+      }
+
+      $ufo.css('left', new_x);
+      $ufo.css('top', new_y);
+    }
+
+    function start_ufo_mission() {
+      ufo_s = 10;
+      var $elements = jQuery('input,select');
+      var target = $elements[Math.floor(Math.random() * $elements.length)];
+      $target = jQuery(target);
+
+      ufo_target_x = $target.offset().left + ($target.width() - $ufo.width()) / 2;
+      ufo_target_y = $target.offset().top - $ufo.height() + 6;
+    }
+  })();
+</script>
