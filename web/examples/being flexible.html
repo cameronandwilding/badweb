@@ -1,0 +1,72 @@
+<style>
+  #vote {
+    width: 60%;
+    margin: auto;
+  }
+
+  .table-group select {
+    max-height: 18px;
+  }
+
+  .table-group input {
+    margin-bottom: 20px;
+  }
+
+  .red {
+    color: red;
+  }
+
+  table th h4 {
+    margin: 10px auto;
+    width: 60%;
+  }
+
+</style>
+<div>
+  <div id="vote">
+    <div class="table-group">
+      <br>
+      <br>
+      <br>
+      <h4 class="red">Free images downloaded from https://pixabay.com/</h4>
+      <br/>
+      <br/>
+      <h2>Please choose a candidate!</h2>
+      <table style="width:100%">
+        <tr>
+          <th><h4>Candidate One</h4></th>
+          <th><h4>Candidate Two</h4></th>
+        </tr>
+        <tr>
+          <td class="candidateOne"><img src="examples/assets/candidateOne.jpg" style="width:300px;"></td>
+          <td class="candidateTwo"><img src="examples/assets/candidateTwo.jpg" style="width:300px;"></td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    jQuery(function () {
+      jQuery('td.candidateOne')
+        .mouseover(function() {
+          jQuery(this).find('img').attr('src', 'examples/assets/tick.png').width(300);
+        })
+        .mouseout(function() {
+          jQuery(this).find('img').attr('src', 'examples/assets/candidateOne.jpg');
+        });
+
+      jQuery('td.candidateTwo')
+        .mouseover(function() {
+          jQuery(this).find('img').attr('src', 'examples/assets/X.png').width(300);
+          alert('You seem to have selected this candidate by mistake!\n Please try again :)')
+        })
+        .mouseout(function() {
+          jQuery(this).find('img').attr('src', 'examples/assets/candidateTwo.jpg');
+        });
+    });
+  })();
+</script>
