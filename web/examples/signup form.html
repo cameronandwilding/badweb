@@ -1,0 +1,79 @@
+<style>
+  #form {
+    width: 60%;
+    margin: auto;
+  }
+
+  .form-group select {
+    max-height: 18px;
+  }
+
+  .form-group input {
+    margin-bottom: 20px;
+  }
+
+  input {
+    position: relative;
+  }
+
+  label.error {
+    display: none !important;
+  }
+</style>
+
+<div>
+  <div id="form">
+    <h2>Signup form</h2>
+    <br>
+    <div class="form-group">
+      <form name="registration" novalidate>
+        <label>Please fill in all mandatory fields:</label>
+        <br>
+        <br>
+        <fieldset>
+          <legend>Login details</legend>
+          Login name: <input type="text" name="loginname" required><br>
+          Email: <input type="text" name="email"><br>
+          Password <input type="password" name="password" required><br>
+        </fieldset>
+
+        <fieldset>
+          <legend>Personal info</legend>
+          First name: <input type="text" name="fname" required><br>
+          Last name: <input type="text" name="lname"><br>
+          Company name: <input type="text" name="companyname"><br>
+          Job title: <input type="text" name="jobtitle" required><br>
+          Address: <input type="text" name="address"><br>
+          City: <input type="text" name="address"><br>
+          Town: <input type="text" name="town" required><br>
+          PostCode: <input type="text" name="pcode"><br>
+          Number of siblings: <input type="text" name="noOfSiblings"><br>
+        </fieldset>
+
+        <input type="submit" value="Submit" id="submit">
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+
+<script>
+  (function () {
+    jQuery(function () {
+      var $form = jQuery("form[name='registration']");
+      $form.validate({
+        rules: {},
+        messages: {},
+        submitHandler: function() {
+          $form.submit();
+        },
+        invalidHandler: function() {
+          alert('User error: It is not our fault. Please try again!');
+          $form.find('input[type=text], input[type=password]').val('');
+        }
+      });
+    });
+  })();
+</script>
