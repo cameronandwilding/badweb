@@ -62,7 +62,7 @@ $page = @$_GET['page'];
 
 <div id="header">
   <div class="container">
-    <h1>What not to do on the web</h1>
+    <h1>What not <img src="examples/assets/X.png" style="width:30px;"> to do on the web</h1>
     <hr/>
     <?php echo $links; ?>
   </div>
