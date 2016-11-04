@@ -138,8 +138,8 @@
 
       if (d <= ufo_s) {
         if (mode == MODE_CHASE) {
-          new_x = ufo_target_x;
-          new_y = ufo_target_y;
+          new_x = ufo_target_x + (Math.random() - 0.5) * 5;
+          new_y = ufo_target_y + (Math.random() - 0.5) * 5;
           $target.css('opacity', parseFloat($target.css('opacity')) - 0.05);
         } else if (mode == MODE_ESCAPE) {
           mode = MODE_CHASE;
@@ -147,8 +147,8 @@
           return;
         }
       } else {
-        new_x = ux + (dx / d) * ufo_s;
-        new_y = uy + (dy / d) * ufo_s;
+        new_x = ux + (dx / d) * ufo_s + (Math.random() - 0.5) * 12;
+        new_y = uy + (dy / d) * ufo_s + (Math.random() - 0.5) * 12;
       }
 
       $ufo.css('left', new_x);
