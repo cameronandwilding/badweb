@@ -38,8 +38,19 @@
           <th><h4>Candidate Two</h4></th>
         </tr>
         <tr>
-          <td class="candidateOne"><img src="examples/assets/candidateOne.jpg" style="width:300px;"></td>
-          <td class="candidateTwo"><img src="examples/assets/candidateTwo.jpg" style="width:300px;"></td>
+
+          <td>
+            <span class="candidateOne">
+              <img src="examples/assets/candidateOne.jpg" style="width:300px;">
+              <img src="examples/assets/tick.png" style="width:300px; display: none">
+            </span>
+          </td>
+          <td>
+            <span class="candidateTwo">
+            <img src="examples/assets/candidateTwo.jpg" style="width:300px;">
+            <img src="examples/assets/X.png" style="width:300px; display: none">
+            </span>
+          </td>
         </tr>
       </table>
 
@@ -51,22 +62,19 @@
 <script>
   (function () {
     jQuery(function () {
-      jQuery('td.candidateOne')
-        .mouseover(function() {
-          jQuery(this).find('img').attr('src', 'examples/assets/tick.png').width(300);
-        })
-        .mouseout(function() {
-          jQuery(this).find('img').attr('src', 'examples/assets/candidateOne.jpg');
-        });
+      jQuery('.candidateOne').click(function() {
+        jQuery('img', this).toggle();
+      });
 
-      jQuery('td.candidateTwo')
-        .mouseover(function() {
-          jQuery(this).find('img').attr('src', 'examples/assets/X.png').width(300);
-          alert('You seem to have selected this candidate by mistake!\n Please try again :)')
-        })
-        .mouseout(function() {
-          jQuery(this).find('img').attr('src', 'examples/assets/candidateTwo.jpg');
-        });
+      jQuery('.candidateTwo').click(function() {
+        var $image = jQuery('img', this);
+        $image.toggle();
+
+        var $wrongDecision = confirm('You seem to have selected this candidate by mistake!\n Please try again :)');
+        if ($wrongDecision) {
+          $image.toggle();
+        }
+      });
     });
   })();
 </script>
