@@ -1,0 +1,45 @@
+<style>
+    #form {
+        width: 60%;
+        margin: auto;
+    }
+
+    input {
+        position: relative;
+    }
+</style>
+
+<div>
+    <div id="form">
+        <h2>I'm too lazy to handle your input.</h2>
+
+        <div class="form-group">
+            <input type="text" id="lazy"
+                   onKeyDown="typewatch('cb(3)', 1  );"/>
+        </div>
+        <input id="searchBtn" type="button" onclick="alert('clicked.')" value="Search" class="buttonCore" title="Search">
+
+    </div>
+</div>
+
+<script>
+    var typewatch = function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        }  ;
+    }();
+
+    function cb(){
+        var inputValue = document.getElementById('lazy').value;
+        document.getElementById('lazy').value = '';
+        //setTimeout(origValueHandler(), 5000)
+    }
+
+    function origValueHandler() {
+        //console.log(setTimeout(document.getElementById('lazy').value = 'test', 5000))
+    }
+
+    document.getElementById("searchBtn").disabled=true;
+</script>

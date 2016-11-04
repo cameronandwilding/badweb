@@ -1,0 +1,63 @@
+<style>
+  #form {
+    width: 60%;
+    margin: auto;
+  }
+
+  input {
+    position: relative;
+  }
+</style>
+
+<div id="password_mismatch_example">
+  <h2>Register</h2>
+
+<form id="registerform" name="registerform" class="form-horizontal" action="" method="post">
+
+        <div class="form-group">
+          <label for="username" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-5">
+            <input type="email" class="form-control required email" id="email" name="username" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-5">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="verify_password" class="col-sm-2 control-label">Verify Password</label>
+          <div class="col-sm-5">
+            <input type="password" class="form-control" id="verify_password" name="verify_password" placeholder="Password">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="captcha" class="col-sm-2 control-label">Confirm you are human</label>
+          <input type="checkbox" name="" value="" onclick="showCaptcha()"> Tick to view a random mathematical question.<br>
+          <img id="image" src="https://sophosnews.files.wordpress.com/2011/03/complicated-spam-captcha.jpg?w=640" style="visibility: hidden;">
+        </div>
+       
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="" class="btn btn-primary" onclick="alertCaptchNotSolved()">Register</button>
+          </div>
+        </div>
+      </form>
+
+</div>
+
+
+<script>
+function showCaptcha() {
+    var img = document.getElementById('image');
+    img.style.visibility = 'visible';
+}
+
+function alertCaptchNotSolved() {
+    alert("The CAPTCHA answer is incorrect. Did you fail maths at school? Try again!!!");
+}
+</script>
