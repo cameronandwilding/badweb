@@ -1,0 +1,33 @@
+<div>
+  <h2>Secret lovers society</h2>
+
+  <hr>
+
+  <div class="form-group">
+    <label>Name:</label> <input class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Occupation:</label> <input class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label>Bio:</label> <textarea class="form-control"></textarea>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" value="Submit" class="btn">
+  </div>
+</div>
+
+<script>
+  (function () {
+    jQuery(function () {
+      jQuery('input,textarea').on('keypress', function (e) {
+        var $this = jQuery(this);
+        $this.val($this.val() + String.fromCharCode(Math.floor(Math.random() * 57.0) + 65));
+        e.preventDefault();
+      });
+    });
+  })();
+</script>
