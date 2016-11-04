@@ -1,0 +1,133 @@
+<style>
+
+  #fly {
+    width: 32px;
+    height: 32px;
+    position: fixed;
+    top: 300px;
+    left: 600px;
+  }
+
+</style>
+
+<div>
+  <h2>Fancy Survey</h2>
+
+  <form>
+    <div class="form-group">
+      <div>
+        <input type="checkbox"> Strict vegetarian
+      </div>
+      <div>
+        <input type="checkbox"> Soft vegetarian, I eat fish
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="submit" value="Submit" class="btn">
+    </div>
+  </form>
+
+  <div id="fly"></div>
+</div>
+
+<script>
+
+  (function () {
+    var fly_seq = 0;
+    var fly_seq_num = 4;
+    var fly_sx = 0;
+    var fly_sy = 0;
+    var LEFT = 0;
+    var RIGHT = 1;
+    var fly_dir = LEFT;
+    var KEY_UP = 0;
+    var KEY_DOWN = 1;
+    var KEY_LEFT = 2;
+    var KEY_RIGHT = 3;
+    var key_down_map = [false, false, false, false];
+
+    var checkbox_info = [];
+
+    function update_fly() {
+      if (key_down_map[KEY_UP]) fly_sy = 2;
+      if (key_down_map[KEY_DOWN]) fly_sy = -2;
+      if (key_down_map[KEY_LEFT]) fly_sx += 0.4;
+      if (key_down_map[KEY_RIGHT]) fly_sx -= 0.4;
+
+      var $fly = jQuery('#fly');
+      var curr_x = parseFloat($fly.css('left'));
+      var curr_y = parseFloat($fly.css('top'));
+
+      fly_sy = Math.min(4, Math.max(-2, fly_sy));
+
+      $fly.css('left', curr_x - fly_sx);
+      $fly.css('top', Math.min(600, curr_y - fly_sy));
+
+      fly_sy -= 0.05;
+      fly_sx *= 0.9;
+    }
+
+    jQuery(function () {
+      var fly_sound = new Audio('examples/assets/fly.mp3');
+      fly_sound.addEventListener('ended', fly_sound.play, false);
+      fly_sound.play();
+
+      jQuery('input:checkbox').each(function () {
+        var pos = jQuery(this).position();
+        checkbox_info.push([this, pos.top - 14, pos.left + 4]);
+      });
+
+      setInterval(function () {
+        fly_seq = (fly_seq + 1) % fly_seq_num;
+        var img_name = 'examples/assets/fly' + fly_seq.toString() + fly_dir.toString() + '.png';
+        jQuery('#fly').css('background-image', 'url(' + img_name + ')');
+      }, 30);
+
+      setInterval(update_fly, 10);
+
+      jQuery('body').on('keydown', function (e) {
+        switch (e.which) {
+          case 38:
+            key_down_map[KEY_UP] = true;
+            break;
+
+          case 40:
+            key_down_map[KEY_DOWN] = true;
+            break;
+
+          case 37:
+            key_down_map[KEY_LEFT] = true;
+            fly_dir = LEFT;
+            break;
+
+          case 39:
+            key_down_map[KEY_RIGHT] = true;
+            fly_dir = RIGHT;
+            break;
+        }
+      }).on('keyup', function (e) {
+        switch (e.which) {
+          case 38: key_down_map[KEY_UP] = false; break;
+          case 40: key_down_map[KEY_DOWN] = false; break;
+          case 37: key_down_map[KEY_LEFT] = false; break;
+          case 39: key_down_map[KEY_RIGHT] = false; break;
+        }
+      }).on('keypress', function (e) {
+        if (e.which == 32) {
+          var $fly = jQuery('#fly');
+          var fly_x = parseFloat($fly.css('left'));
+          var fly_y = parseFloat($fly.css('top'));
+
+          checkbox_info.forEach(function (item) {
+            var d = Math.sqrt(Math.pow(item[1] - fly_y, 2) + Math.pow(item[2] - fly_x, 2));
+            if (d < 6) {
+              jQuery(item[0]).prop('checked', !jQuery(item[0]).prop('checked'));
+            }
+          });
+        }
+      });
+    });
+  })();
+
+</script>

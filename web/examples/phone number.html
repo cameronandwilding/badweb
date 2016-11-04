@@ -1,0 +1,55 @@
+<style>
+  #phone_example, #phone_example * {
+    cursor: url("examples/assets/finger.png"), auto !important;
+  }
+</style>
+
+<div id="phone_example">
+  <h2>Personal details</h2>
+
+    <label>Phone number:</label>
+    <div id="phone">
+      <div>
+        <input id="phone_number">
+      </div>
+      <div class="buttons">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+      </div>
+      <div class="buttons">
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+      </div>
+      <div class="buttons">
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+      </div>
+      <div class="buttons">
+        <button>+</button>
+        <button>0</button>
+        <button>#</button>
+      </div>
+      <div class="buttons">
+        <button>&lt;</button>
+      </div>
+    </div>
+
+    <input type="submit" value="Submit" class="btn">
+</div>
+
+<script>
+  jQuery(function () {
+    jQuery('button').on('click', function () {
+      var value = jQuery(this).text();
+      if (value == '<') {
+        if (!jQuery('#phone_number').val()) return;
+        jQuery('#phone_number').val(jQuery('#phone_number').val().substr(0, jQuery('#phone_number').val().length - 1));
+      } else {
+        jQuery('#phone_number').val(jQuery('#phone_number').val() + value);
+      }
+    });
+  });
+</script>
