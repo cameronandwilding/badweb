@@ -1,0 +1,78 @@
+<style>
+  #vote {
+    width: 60%;
+    margin: auto;
+  }
+
+  .table-group select {
+    max-height: 18px;
+  }
+
+  .table-group input {
+    margin-bottom: 20px;
+  }
+
+  .red {
+    color: red;
+  }
+
+  table th h4 {
+    margin: 10px auto;
+    width: 60%;
+  }
+
+</style>
+<div>
+  <div id="vote">
+    <div class="table-group">
+      <br>
+      <br>
+      <br>
+      <h4 class="red">Free images downloaded from https://pixabay.com/</h4>
+      <br/>
+      <br/>
+      <h2>Please choose a candidate!</h2>
+      <table style="width:100%">
+        <tr>
+          <th><h4>Candidate One</h4></th>
+          <th><h4>Candidate Two</h4></th>
+        </tr>
+        <tr>
+
+          <td>
+            <span class="candidateOne">
+              <img src="examples/assets/candidateOne.jpg" style="width:300px;">
+              <img src="examples/assets/tick.png" style="width:300px; display: none">
+            </span>
+          </td>
+          <td>
+            <span class="candidateTwo">
+            <img src="examples/assets/candidateTwo.jpg" style="width:300px;">
+            <img src="examples/assets/X.png" style="width:300px; display: none">
+            </span>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    jQuery(function () {
+      jQuery('.candidateOne').click(function() {
+        jQuery('img', this).toggle();
+      });
+
+      jQuery('.candidateTwo').click(function() {
+        var $image = jQuery('img', this);
+        $image.toggle();
+
+        confirm('You seem to have selected this candidate by mistake!\n Please try again :)');
+        $image.toggle();
+      });
+    });
+  })();
+</script>

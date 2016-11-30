@@ -62,9 +62,8 @@ $page = @$_GET['page'];
 
 <div id="header">
   <div class="container">
-    <h1>What not to do on the web</h1>
-    <hr/>
-    <?php echo $links; ?>
+    <h1>What not <img src="examples/assets/X.png" style="width:30px;"> to do on the web</h1>
+    <br>
   </div>
 </div>
 
@@ -76,6 +75,13 @@ $page = @$_GET['page'];
       <p>Select a sample.</p>
     <?php endif; ?>
   </div>
+</div>
+
+<br>
+<br>
+
+<div id="header">
+  <?php echo $links; ?>
 </div>
 
 </body>
